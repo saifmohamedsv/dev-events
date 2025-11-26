@@ -1,6 +1,6 @@
-import { EventCard } from "@/components/";
+import EventList from "@/components/event-list";
 import { ExploreBtn } from "@/components/shared";
-import { events } from "@/lib/constants";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -9,19 +9,17 @@ export default function Home() {
         The Hub for every Dev <br /> Event You Can&apos;t Miss.
       </h1>
 
-      <p className="text-center mt-5">Hackathons, Meetups, and Conferences, All in One Place</p>
+      <p className="text-center mt-5">
+        Hackathons, Meetups, and Conferences, All in One Place
+      </p>
 
       <ExploreBtn />
 
       <div className="mt-20 space-y-7">
         <h3>Featured Events</h3>
-        <ul className="events">
-          {events.map((event) => (
-            <li key={event.slug} className="list-none">
-              <EventCard {...event} />
-            </li>
-          ))}
-        </ul>
+        <Suspense fallback={<div>Loading...</div>}>
+          <EventList />
+        </Suspense>
       </div>
     </section>
   );
